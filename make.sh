@@ -212,11 +212,11 @@ if [ "$outputtype" == "Aonly" ]; then
 fi
 
 date=`date +%Y%m%d`
-outputname="$romtypename-$outputtype-$sourcever-$date-ErfanGSI"
+outputname="$romtypename-$outputtype-$sourcever-$date-GSITutorials"
 outputimagename="$outputname".img
 outputtextname="$outputname".txt
 if [ "$4" == "" ]; then
-    echo "Create out dir"
+    echo "Create out directory"
     outdirname="out"
     outdir="$LOCALDIR/$outdirname"
     mkdir -p "$outdir"
@@ -237,7 +237,7 @@ elif [[ $(grep "ro.build.id" $systemdir/system/build.prop) ]]; then
 fi
 displayid2=$(echo "$displayid" | sed 's/\./\\./g')
 bdisplay=$(grep "$displayid" $systemdir/system/build.prop | sed 's/\./\\./g; s:/:\\/:g; s/\,/\\,/g; s/\ /\\ /g')
-sed -i "s/$bdisplay/$displayid2=Built\.with\.ErfanGSI\.Tools/" $systemdir/system/build.prop
+sed -i "s/$bdisplay/$displayid2=Built\.by\.GSITutorials\.with\.ErfanGSI\.Tools/" $systemdir/system/build.prop
 
 # Getting system size and add approximately 5% on it just for free space
 systemsize=`du -sk $systemdir | awk '{$1*=1024;$1=int($1*1.05);printf $1}'`
@@ -259,5 +259,5 @@ if [ "$sourcever" == "9" ]; then
 fi
 $scriptsdir/mkimage.sh $systemdir $outputtype $systemsize $output $useold > $tempdir/mkimage.log
 
-echo "Remove Temp dir"
+echo "Remove Temp directory"
 rm -rf "$tempdir"
